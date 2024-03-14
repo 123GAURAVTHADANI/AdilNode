@@ -1,10 +1,10 @@
 var express=require('express');
-const {postUser, getUserDetails} = require('../Controller/userController');
+const {postUser, getUserDetails, loginUserController} = require('../Controller/userController');
+const { verify } = require('../Middleware/VerifyMiddleware');
 var router=express.Router();
 
 
-console.log("inside");
 router.post('/createUser', postUser);
-router.get('/getUserDetails',getUserDetails);
-
+router.get('/getUserDetails',verify,getUserDetails);
+router.post('/login', loginUserController);
 module.exports=router;
